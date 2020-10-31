@@ -16,7 +16,6 @@ set_target_properties (
 	CXX_STANDARD 17
 	CXX_STANDARD_REQUIRED ON	
 )
-message("\r\n\r\n ahper=" ${PROJECT_SOURCE_DIR} "\r\n\r\n")
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/"modules" ${CMAKE_MODULE_PATH})
 set(SFML_STATIC_LIBRARIES TRUE)
 
