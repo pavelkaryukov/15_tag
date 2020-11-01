@@ -8,8 +8,13 @@ set(resources_bin_dir ${CMAKE_CURRENT_BINARY_DIR}/resources)
 
 file(MAKE_DIRECTORY ${resources_bin_dir})
 file(COPY ${resources} DESTINATION ${resources_bin_dir})
-set(game_src "game/game.cpp" "game/game.h")
-add_executable (15_tag "main.cpp" ${game_src})
+set(assets_src      "assets/assets.h")
+set(game_model_src  "game_model/game_model.h" "game_model/game_model.cpp")
+set(game_render_src "game_render/game_render.h" "game_render/game_render.cpp")     
+set(game_controller_src "game_controller/game_controller.h" "game_controller/game_controller.cpp")
+
+
+add_executable (15_tag "main.cpp" ${assets_src}  ${game_model_src}  ${game_render_src} ${game_controller_src})
 set_target_properties (
 	15_tag 
 	PROPERTIES 
@@ -26,4 +31,3 @@ if(NOT SFML_FOUND)
 endif()
 
 target_link_libraries(15_tag  sfml-graphics sfml-audio)
-# TODO: Add tests and install targets if needed.
