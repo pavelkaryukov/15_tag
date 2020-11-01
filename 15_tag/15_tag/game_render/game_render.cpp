@@ -1,4 +1,4 @@
-#include "game_render.h"
+п»ї#include "game_render.h"
 #include "../assets/assets.h"
 
 GameRender::GameRender(std::weak_ptr<GameModel>&&  aGame) {
@@ -8,10 +8,10 @@ GameRender::GameRender(std::weak_ptr<GameModel>&&  aGame) {
 
 bool GameRender::Init() {
     setPosition(50.f, 50.f);
-    // Создаем окно размером 600 на 600 и частотой обновления 60 кадров в секунду
+    // РЎРѕР·РґР°РµРј РѕРєРЅРѕ СЂР°Р·РјРµСЂРѕРј 600 РЅР° 600 Рё С‡Р°СЃС‚РѕС‚РѕР№ РѕР±РЅРѕРІР»РµРЅРёСЏ 60 РєР°РґСЂРѕРІ РІ СЃРµРєСѓРЅРґСѓ
     m_Window.create(sf::VideoMode(600, 600), "15");
     m_Window.setFramerateLimit(60);
-    // Текст с обозначением клавиш
+    // РўРµРєСЃС‚ СЃ РѕР±РѕР·РЅР°С‡РµРЅРёРµРј РєР»Р°РІРёС€
     m_Text = sf::Text("F2 - New Game / Esc - Exit / Arrow Keys - Move Tile", Assets::Instance().font, 20);
     m_Text.setFillColor(sf::Color::Cyan);
     m_Text.setPosition(5.f, 5.f);
@@ -29,20 +29,20 @@ void GameRender::draw(sf::RenderTarget& aTarget, sf::RenderStates aStates) const
     aStates.transform *= getTransform();
     sf::Color color = sf::Color(200, 100, 200);
 
-    // Рисуем рамку игрового поля
+    // Р РёСЃСѓРµРј СЂР°РјРєСѓ РёРіСЂРѕРІРѕРіРѕ РїРѕР»СЏ
     sf::RectangleShape shape(sf::Vector2f(GameModel::FIELD_SIZE, GameModel::FIELD_SIZE));
     shape.setOutlineThickness(2.f);
     shape.setOutlineColor(color);
     shape.setFillColor(sf::Color::Transparent);
     aTarget.draw(shape, aStates);
 
-    // Подготавливаем рамку для отрисовки всех плашек
+    // РџРѕРґРіРѕС‚Р°РІР»РёРІР°РµРј СЂР°РјРєСѓ РґР»СЏ РѕС‚СЂРёСЃРѕРІРєРё РІСЃРµС… РїР»Р°С€РµРє
     shape.setSize(sf::Vector2f(GameModel::CELL_SIZE - 2, GameModel::CELL_SIZE - 2));
     shape.setOutlineThickness(2.f);
     shape.setOutlineColor(color);
     shape.setFillColor(sf::Color::Transparent);
 
-    // Подготавливаем текстовую заготовку для отрисовки номеров плашек
+    // РџРѕРґРіРѕС‚Р°РІР»РёРІР°РµРј С‚РµРєСЃС‚РѕРІСѓСЋ Р·Р°РіРѕС‚РѕРІРєСѓ РґР»СЏ РѕС‚СЂРёСЃРѕРІРєРё РЅРѕРјРµСЂРѕРІ РїР»Р°С€РµРє
     sf::Text text("", Assets::Instance().font, 52);
     DrawElements(shape, text, color, aTarget, aStates);
 }
@@ -57,22 +57,22 @@ void GameRender::DrawElements(sf::RectangleShape& aShape, sf::Text& aText, sf::C
         aText.setFillColor(aColor);
         aText.setString(std::to_string(elements[i]));
         if (m_GameModel.lock()->IsSolved()) {
-            // Решенную головоломку выделяем другим цветом
+            // Р РµС€РµРЅРЅСѓСЋ РіРѕР»РѕРІРѕР»РѕРјРєСѓ РІС‹РґРµР»СЏРµРј РґСЂСѓРіРёРј С†РІРµС‚РѕРј
             aShape.setOutlineColor(sf::Color::Cyan);
             aText.setFillColor(sf::Color::Cyan);
         }
         else if (elements[i] == i + 1) {
-            // Номера плашек на своих местах выделяем цветом
+            // РќРѕРјРµСЂР° РїР»Р°С€РµРє РЅР° СЃРІРѕРёС… РјРµСЃС‚Р°С… РІС‹РґРµР»СЏРµРј С†РІРµС‚РѕРј
             aText.setFillColor(sf::Color::Green);
         }
 
-        // Рисуем все плашки, кроме пустой
+        // Р РёСЃСѓРµРј РІСЃРµ РїР»Р°С€РєРё, РєСЂРѕРјРµ РїСѓСЃС‚РѕР№
         if (elements[i] > 0) {
-            // Вычисление позиции плашки для отрисовки
+            // Р’С‹С‡РёСЃР»РµРЅРёРµ РїРѕР·РёС†РёРё РїР»Р°С€РєРё РґР»СЏ РѕС‚СЂРёСЃРѕРІРєРё
             sf::Vector2f position(i % GameModel::SIZE * GameModel::CELL_SIZE + 10.f,
                                   i / GameModel::SIZE * GameModel::CELL_SIZE + 10.f);
             aShape.setPosition(position);
-            // Позицию текста подбирал вручную
+            // РџРѕР·РёС†РёСЋ С‚РµРєСЃС‚Р° РїРѕРґР±РёСЂР°Р» РІСЂСѓС‡РЅСѓСЋ
             aText.setPosition(position.x + 30.f + (elements[i] < 10 ? 15.f : 0.f), position.y + 25.f);
             aTarget.draw(aShape, aStates);
             aTarget.draw(aText, aStates);

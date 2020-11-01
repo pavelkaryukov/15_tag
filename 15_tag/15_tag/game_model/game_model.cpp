@@ -1,4 +1,4 @@
-#include "game_model.h"
+п»ї#include "game_model.h"
 #include <cstddef>
 
 GameModel::GameModel() {
@@ -6,17 +6,17 @@ GameModel::GameModel() {
 }
 
 void GameModel::Init() {
-    //Заполняем массив плашек
+    //Р—Р°РїРѕР»РЅСЏРµРј РјР°СЃСЃРёРІ РїР»Р°С€РµРє
     for (int i = 0; i < ARRAY_SIZE; ++i)
         m_Elements[i] = i + 1;
-    //Ставим пустую плашку в правую нижнюю позицию
+    //РЎС‚Р°РІРёРј РїСѓСЃС‚СѓСЋ РїР»Р°С€РєСѓ РІ РїСЂР°РІСѓСЋ РЅРёР¶РЅСЋСЋ РїРѕР·РёС†РёСЋ
     m_EmptyIndex = ARRAY_SIZE - 1;
-    m_Elements[m_EmptyIndex] = 0; //Пустая плашка имеет значение 0
+    m_Elements[m_EmptyIndex] = 0; //РџСѓСЃС‚Р°СЏ РїР»Р°С€РєР° РёРјРµРµС‚ Р·РЅР°С‡РµРЅРёРµ 0
     m_Solved = true;
 }                             
 
 bool GameModel::Check() {
-    //Проверка собранности головоломки
+    //РџСЂРѕРІРµСЂРєР° СЃРѕР±СЂР°РЅРЅРѕСЃС‚Рё РіРѕР»РѕРІРѕР»РѕРјРєРё
     for (std::size_t i = 0; i < ARRAY_SIZE; ++i) {
         if (m_Elements[i] > 0 && m_Elements[i] != i + 1)
             return false;
@@ -25,11 +25,11 @@ bool GameModel::Check() {
 }
 
 void GameModel::Move(Direction direction) {
-    //Вычисляем строку и колонку пустой плашки
+    //Р’С‹С‡РёСЃР»СЏРµРј СЃС‚СЂРѕРєСѓ Рё РєРѕР»РѕРЅРєСѓ РїСѓСЃС‚РѕР№ РїР»Р°С€РєРё
     int col = m_EmptyIndex % SIZE;
     int row = m_EmptyIndex / SIZE;
 
-    //Проверка на возможность перемещения и вычисления индекса плашки
+    //РџСЂРѕРІРµСЂРєР° РЅР° РІРѕР·РјРѕР¶РЅРѕСЃС‚СЊ РїРµСЂРµРјРµС‰РµРЅРёСЏ Рё РІС‹С‡РёСЃР»РµРЅРёСЏ РёРЅРґРµРєСЃР° РїР»Р°С€РєРё
     int moveIndex = -1;
 
     if (direction == Direction::Left && col < (SIZE - 1))

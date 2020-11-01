@@ -1,4 +1,4 @@
-#include "game_controller.h"
+ï»¿#include "game_controller.h"
 #include <stdexcept>
 
 void GameController::Run() {
@@ -6,19 +6,19 @@ void GameController::Run() {
         throw std::runtime_error("GameController: m_Render or m_Game empty");
 
     sf::Event event;
-    int move_counter = 0;	// Ñ÷åò÷èê ñëó÷àéíûõ õîäîâ äëÿ ïåðåìåøèâàíèÿ ãîëîâîëîìêè
+    int move_counter = 0;	// Ð¡Ñ‡ÐµÑ‚Ñ‡Ð¸Ðº ÑÐ»ÑƒÑ‡Ð°Ð¹Ð½Ñ‹Ñ… Ñ…Ð¾Ð´Ð¾Ð² Ð´Ð»Ñ Ð¿ÐµÑ€ÐµÐ¼ÐµÑˆÐ¸Ð²Ð°Ð½Ð¸Ñ Ð³Ð¾Ð»Ð¾Ð²Ð¾Ð»Ð¾Ð¼ÐºÐ¸
 
     while (m_Render.lock()->window().isOpen()) {
         while (m_Render.lock()->window().pollEvent(event)) {
             if (event.type == sf::Event::Closed) m_Render.lock()->window().close();
             if (event.type == sf::Event::KeyPressed) {
-                // Ïîëó÷àåì íàæàòóþ êëàâèøó - âûïîëíÿåì ñîîòâåòñòâóþùåå äåéñòâèå
+                // ÐŸÐ¾Ð»ÑƒÑ‡Ð°ÐµÐ¼ Ð½Ð°Ð¶Ð°Ñ‚ÑƒÑŽ ÐºÐ»Ð°Ð²Ð¸ÑˆÑƒ - Ð²Ñ‹Ð¿Ð¾Ð»Ð½ÑÐµÐ¼ ÑÐ¾Ð¾Ñ‚Ð²ÐµÑ‚ÑÑ‚Ð²ÑƒÑŽÑ‰ÐµÐµ Ð´ÐµÐ¹ÑÑ‚Ð²Ð¸Ðµ
                 if (event.key.code == sf::Keyboard::Escape) m_Render.lock()->window().close();
                 if (event.key.code == sf::Keyboard::Left)   m_Game.lock()->Move(Direction::Left);
                 if (event.key.code == sf::Keyboard::Right)  m_Game.lock()->Move(Direction::Right);
                 if (event.key.code == sf::Keyboard::Up)     m_Game.lock()->Move(Direction::Up);
                 if (event.key.code == sf::Keyboard::Down)   m_Game.lock()->Move(Direction::Down);
-                // Íîâàÿ èãðà
+                // ÐÐ¾Ð²Ð°Ñ Ð¸Ð³Ñ€Ð°
                 if (event.key.code == sf::Keyboard::F2) {
                     m_Game.lock()->Init();
                     move_counter = 100;
@@ -26,10 +26,10 @@ void GameController::Run() {
             }
         }
 
-        // Åñëè ñ÷åò÷èê õîäîâ áîëüøå íóëÿ, ïðîäîëæàåì ïåðåìåøèâàòü ãîëîâîëîìêó
+        // Ð•ÑÐ»Ð¸ ÑÑ‡ÐµÑ‚Ñ‡Ð¸Ðº Ñ…Ð¾Ð´Ð¾Ð² Ð±Ð¾Ð»ÑŒÑˆÐµ Ð½ÑƒÐ»Ñ, Ð¿Ñ€Ð¾Ð´Ð¾Ð»Ð¶Ð°ÐµÐ¼ Ð¿ÐµÑ€ÐµÐ¼ÐµÑˆÐ¸Ð²Ð°Ñ‚ÑŒ Ð³Ð¾Ð»Ð¾Ð²Ð¾Ð»Ð¾Ð¼ÐºÑƒ
         if (move_counter-- > 0) m_Game.lock()->Move((Direction)(rand() % 4));
 
-        // Âûïîëíÿåì íåîáõîäèìûå äåéñòâèÿ ïî îòðèñîâêå
+        // Ð’Ñ‹Ð¿Ð¾Ð»Ð½ÑÐµÐ¼ Ð½ÐµÐ¾Ð±Ñ…Ð¾Ð´Ð¸Ð¼Ñ‹Ðµ Ð´ÐµÐ¹ÑÑ‚Ð²Ð¸Ñ Ð¿Ð¾ Ð¾Ñ‚Ñ€Ð¸ÑÐ¾Ð²ÐºÐµ
         m_Render.lock()->Render();
     }
 }

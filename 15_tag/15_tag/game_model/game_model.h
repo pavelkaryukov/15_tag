@@ -1,14 +1,14 @@
-#pragma once
+п»ї#pragma once
 #include <iostream>
 
 enum class Direction { Left = 0, Right = 1, Up = 2, Down = 3 };
 
 class GameModel {
 public:
-    static const int SIZE = 4;			        // Размер игрового поля в плашках
-    static const int ARRAY_SIZE = SIZE * SIZE;	// Размер массива
-    static const int FIELD_SIZE = 500;		    // Размер игрового поля в пикселях
-    static const int CELL_SIZE = 120;		    // Размер плашки в пикселях
+    static const int SIZE = 4;			        // Р Р°Р·РјРµСЂ РёРіСЂРѕРІРѕРіРѕ РїРѕР»СЏ РІ РїР»Р°С€РєР°С…
+    static const int ARRAY_SIZE = SIZE * SIZE;	// Р Р°Р·РјРµСЂ РјР°СЃСЃРёРІР°
+    static const int FIELD_SIZE = 500;		    // Р Р°Р·РјРµСЂ РёРіСЂРѕРІРѕРіРѕ РїРѕР»СЏ РІ РїРёРєСЃРµР»СЏС…
+    static const int CELL_SIZE = 120;		    // Р Р°Р·РјРµСЂ РїР»Р°С€РєРё РІ РїРёРєСЃРµР»СЏС…
 protected:
     int m_Elements[ARRAY_SIZE];
     int m_EmptyIndex;
